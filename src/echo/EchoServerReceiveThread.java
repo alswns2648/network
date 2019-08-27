@@ -38,6 +38,7 @@ public class EchoServerReceiveThread extends Thread {
 					EchoServer.log(" 클라이언트로 부터 연결 끊김");
 					break;
 				}
+				
 				//				byte[] buffer = new byte[256];
 				//				int readByteCount = is.read(buffer); //Blocking
 				//				if(readByteCount == -1) {

@@ -19,6 +19,9 @@ public class TCPServer {
 			//1. 서버소켓 생성
 			serverSocket = new ServerSocket();
 			
+			//1-1. Time-Wait 상태에서 '서버 소켓을 즉시 사용'하기 위해서 ..
+			serverSocket.setReuseAddress(true);
+			
 			//2. Binding:
 			//   Socket에 SocketAddress(IPAddress + Port)
 			//   바인딩한다.
@@ -33,11 +36,11 @@ public class TCPServer {
 			InetSocketAddress inetRemoteSocketAddress = 
 					(InetSocketAddress)socket.getRemoteSocketAddress();
 			
-			String remoteHostAdress = inetRemoteSocketAddress.getAddress().getHostAddress();
+			String remoteHostAddress = inetRemoteSocketAddress.getAddress().getHostAddress();
 			int remoteHostPort = inetRemoteSocketAddress.getPort();
 			
 			System.out.println("[TCPServer] connected from client[" + 
-				remoteHostAdress + ":" + 
+				remoteHostAddress + ":" + 
 				remoteHostPort + "]");
 			
 			try {
@@ -61,6 +64,11 @@ public class TCPServer {
 					System.out.println("[TCPServer] received:" + data);
 				
 					//6. 데이터 쓰기
+					try {
+						Thread.sleep(1000);
+					}catch(InterruptedException e){
+						e.printStackTrace();						
+					}
 					os.write(data.getBytes("UTF-8"));
 				}
 				
