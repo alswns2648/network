@@ -47,6 +47,7 @@ public class ChatClient {
 				if("quit".equals(input)) {
 					pw.println("quit:");
 					pw.flush();
+					//socket.close();
 					break;
 				}
 				if("".equals(input)) {
@@ -60,13 +61,11 @@ public class ChatClient {
 
 		}catch(IOException e) {
 			log("error : " + e );
+			
 
 		}finally {
 			if(scanner!=null)
 			scanner.close();
-			
-
-			
 		}
 	}
 

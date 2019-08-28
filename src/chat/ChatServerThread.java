@@ -7,6 +7,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.Writer;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.List;
 
 
@@ -32,11 +33,12 @@ public class ChatServerThread extends Thread {
 			//요청 처리
 			while(true) {
 				String request = br.readLine();
-//				if(request == null ) {
-//					ChatServer.log("클라이언트로 부터 연결 끊김");
-//					doQuit(pw);
-//					break;
-//				}
+
+				if(request == null ) {
+					ChatServer.log("클라이언트로 부터 연결 끊김");
+					doQuit(pw);
+					break;
+				}
 
 				String[] tokens = request.split(":");
 
@@ -49,14 +51,16 @@ public class ChatServerThread extends Thread {
 					break;
 				}else {
 					ChatServer.log("에러 : 알 수 없는 요청( " + tokens[0] + " )" );
-				}	
+				}
+
 			}
 
+		}catch(SocketException e) {
+			ChatServer.log("abnormal closed");
 		}
 		catch(IOException e) {
 			e.printStackTrace();
-		}
-		finally {
+		} finally { 
 			try {
 				if(socket != null && socket.isClosed() == false) {
 					socket.close();
@@ -90,7 +94,7 @@ public class ChatServerThread extends Thread {
 	}
 
 	private void addWriter(Writer writer) {
-		synchronized(listWriters) {
+		synchronized (listWriters) {
 			listWriters.add(writer);
 		}
 	}
