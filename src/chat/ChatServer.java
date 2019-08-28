@@ -25,7 +25,7 @@ public class ChatServer {
 			//String inetAddress = InetAddress.getLocalHost().getHostAddress();
 			InetSocketAddress inetSocketAddress = new InetSocketAddress(PORT);
 			serverSocket.bind(inetSocketAddress);
-			log("연결 기다림 " + ChatClient.SERVER_IP + ":" + PORT);
+			log("연결 기다림 " + ":" + PORT);
 
 
 			//3.요청 대기
