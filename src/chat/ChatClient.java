@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public class ChatClient {
 	//private static final String SERVER_IP = "192.168.1.15";
-	private static final String SERVER_IP = "127.0.0.1";
+	public static final String SERVER_IP = "127.0.0.1";
 	private static final int SERVER_PORT = 7000;
 
 	public static void main(String[] args) {
@@ -50,7 +50,7 @@ public class ChatClient {
 
 				if("quit".equals(input)) {
 					pw.println("quit:");
-					//pw.flush();
+					pw.flush();
 					break;
 				}
 				if("".equals(input)) {
@@ -64,11 +64,12 @@ public class ChatClient {
 
 		}catch(IOException e) {
 			log("error : " + e );
-			
+
 
 		}finally {
 			if(scanner!=null)
-			scanner.close();
+				scanner.close();
+
 		}
 	}
 

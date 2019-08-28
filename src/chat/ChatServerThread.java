@@ -28,9 +28,10 @@ public class ChatServerThread extends Thread {
 	public void run() {
 
 		try {
-			InetSocketAddress inetRemoteSocketAddress = (InetSocketAddress)socket.getRemoteSocketAddress();
-			ChatServer.log("클라이언트로부터 연결 " + inetRemoteSocketAddress.getAddress().getHostAddress() + ":" 
-					+ inetRemoteSocketAddress.getPort());
+			
+//			InetSocketAddress inetRemoteSocketAddress = (InetSocketAddress)socket.getRemoteSocketAddress();
+//			ChatServer.log("클라이언트로부터 연결 " + inetRemoteSocketAddress.getAddress().getHostAddress() + ":" 
+//					+ inetRemoteSocketAddress.getPort());
 
 			BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8" ));
 			PrintWriter pw = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(),"UTF-8"),true);

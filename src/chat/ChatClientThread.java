@@ -10,7 +10,7 @@ import echo.EchoServer;
 public class ChatClientThread extends Thread {
 	private BufferedReader br;
 	private Socket socket;
-	
+
 	public ChatClientThread(Socket socket, BufferedReader br) {
 		this.socket = socket;
 		this.br = br;
@@ -33,14 +33,14 @@ public class ChatClientThread extends Thread {
 			try {
 				if (this.socket != null && socket.isClosed() == false) {
 					socket.close();
-				} 
-			}catch (IOException e) {
-					e.printStackTrace();
 				}
-
+			}catch (IOException e) {
+				e.printStackTrace();
 			}
-		}	
-	}
+
+		}
+	}	
+}
 
 
 

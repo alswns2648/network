@@ -2,6 +2,7 @@ package chat;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -19,13 +20,13 @@ public class ChatServer {
 			//1. 서버소켓 생성
 			serverSocket = new ServerSocket();
 			listWriters = new ArrayList<Writer>();
-			
+
 			//2.바인딩
-//			String inetAddress = InetAddress.getLocalHost().getHostAddress();
+			//String inetAddress = InetAddress.getLocalHost().getHostAddress();
 			InetSocketAddress inetSocketAddress = new InetSocketAddress(PORT);
 			serverSocket.bind(inetSocketAddress);
-			log("연결 기다림 " + /*inetAddress +*/ ":" + PORT);
-			
+			log("연결 기다림 " + ChatClient.SERVER_IP + ":" + PORT);
+
 
 			//3.요청 대기
 			while(true) {
@@ -35,20 +36,20 @@ public class ChatServer {
 
 		}catch (IOException e) {
 			e.printStackTrace();
-			
+
 		}finally {
 			try {
 				if(serverSocket != null && serverSocket.isClosed() == false) {
 					serverSocket.close();
 				}
 			}catch(IOException e) {
-					e.printStackTrace();
-				}
+				e.printStackTrace();
 			}
 		}
-	
-		public static void log(String log) {
-			System.out.println("[ChatServer]" + log);
-		}
 	}
+
+	public static void log(String log) {
+		System.out.println("[ChatServer]" + log);
+	}
+}
 
